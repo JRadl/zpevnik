@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Song, emptySong, lyricsToVerses, versesToLyrics } from "../../resources/model/songHelper"
 import model from "../../resources/model/model"
-import { Song as SongComponent } from "../../components/song"
+import SongComponent from "../../components/song/Song"
 import "./EditorPage.scss"
 import NumberInput from "../../components/numberInput/NumberInput"
 import { createSong, modifySong } from "../../resources/api/song"
@@ -106,7 +106,6 @@ export default function EditorPage(){
                 fontSize={model.settings.fontSize}
                 trans={model.settings.transpose}
                 transposeCapo={model.settings.transposeCapo}
-                instrument={model.settings.chords}
             />
         </div>
     </div>

@@ -1,4 +1,3 @@
-import { Lyrics } from "../components/lyrics";
 import model from "./model/model";
 
 export function normalize(string) {

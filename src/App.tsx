@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 import "./App.scss";
 import Sidebar from "./components/Sidebar";
 import Toolbar from "./components/Toolbar";
-import NewSongPage from "./pages/NewSong";
 import SongPage from "./pages/SongPage";
 import TestPage from "./pages/TestPage";
 import TexToLyricsPage from "./pages/TexToLyrics";
@@ -26,7 +25,7 @@ function App() {
   useEffect(() => {
     model.addUpdateCallback(() => forceUpdate());
     model.setState({navigate: (to: string)=>navigate(to)});
-  },[])
+  })
 
   const settings = model.settings;
   let className = settings.darkMode ? "dark-theme" : "light-theme"
@@ -43,7 +42,6 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/editor" element={<EditorPage/>}/>
           <Route path="/editor/:id" element={<EditorPage/>}/>
-          <Route path="/new" element={<NewSongPage />} />
           <Route path="/ttl" element={<TexToLyricsPage />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/:id" element={<SongPage />} />

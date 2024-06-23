@@ -10,7 +10,6 @@
     "@tombatossals/react-chords": "^0.2.10",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.36",
-    "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
     "markdown-to-jsx": "^7.2.1",
     "node-sass": "^7.0.3",
@@ -30,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "create-component": "node tools/component.cjs",
+    "crc": "node tools/component.cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3"
   }
 }

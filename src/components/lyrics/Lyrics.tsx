@@ -1,36 +1,41 @@
 import Markdown from 'markdown-to-jsx';
 import model from '../../resources/model/model';
-import { ChordBox } from '../chordBox';
-import './lyrics.scss';
+import './Lyrics.scss';
+import ChordBoxComponent from '../chordBox/ChordBox';
 
 const replacers = [
   {
     reg: /\\h{(.*?)}/g,
-    fun: str => `<span class="hskip" style="width:${str.substring(3, str.length - 1)}"> </span>`
+    fun: (str: string) => `<span class="hskip" style="width:${str.substring(3, str.length - 1)}"> </span>`
   },
   {
     reg: /\\hskip{(.*?)}/g,
-    fun: str => `<span class="hskip" style="width:${str.substring(3, str.length - 1)}"> </span>`
+    fun: (str: string) => `<span class="hskip" style="width:${str.substring(3, str.length - 1)}"> </span>`
   },
   {
     reg: "|:",
-    fun: x => "𝄆"
+    fun: (x: any) => "𝄆"
   },
   {
     reg: ":|",
-    fun: x => "𝄇"
+    fun: (x: any) => "𝄇"
   },
   {
     reg: /\[(.*?)\]/g,
-    fun: str => model.settings.displayChords?"<chord>" + str.substring(1, str.length - 1) + "</chord>":""
+    fun: (str: string) => model.settings.displayChords?"<chord>" + str.substring(1, str.length - 1) + "</chord>":""
   },
   {
     reg: /[Jj]ít/g,
-    fun: str => model.state.settings.yeet ? (str[0]=="J"?"Yeet":"yeet") : str
+    fun: (str: string) => model.state.settings.yeet ? (str[0]==="J"?"Yeet":"yeet") : str
   },
 ]
 
-export function Lyrics({ children = "", name = "" }) {
+interface LyriscComponenetProps {
+  children: string
+  name: string
+}
+
+function LyricsComponent({ children = "", name = "" }: LyriscComponenetProps) {
   let text = (typeof children === "string") ? children : ""
   if (typeof name !== "string") name = ""
 
@@ -46,7 +51,7 @@ export function Lyrics({ children = "", name = "" }) {
         options={{
           overrides: {
             chord: {
-              component: ChordBox
+              component: ChordBoxComponent
             },
           }
         }}
@@ -54,3 +59,5 @@ export function Lyrics({ children = "", name = "" }) {
     </div>)}
   </div>
 }
+
+export default LyricsComponent
