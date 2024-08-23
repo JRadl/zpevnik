@@ -1,57 +1,57 @@
 {
-  "name": "zpevnik",
-  "version": "3.9.3",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@tombatossals/chords-db": "^0.5.1",
-    "@tombatossals/react-chords": "^0.2.10",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.36",
-    "@types/react-dom": "^18.2.6",
-    "markdown-to-jsx": "^7.2.1",
-    "node-sass": "^7.0.3",
-    "pocketbase": "^0.15.2",
-    "rc-slider": "^10.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "react-router": "^6.13.0",
-    "react-router-dom": "^6.13.0",
-    "react-scripts": "5.0.1",
-    "react-swipeable": "^7.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "create-component": "node tools/component.cjs",
-    "crc": "node tools/component.cjs"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.3"
-  }
+    "name": "zpevnik",
+    "version": "3.9.3",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@tombatossals/chords-db": "^0.5.1",
+        "@tombatossals/react-chords": "^0.2.10",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.18.36",
+        "@types/react-dom": "^18.2.6",
+        "markdown-to-jsx": "^7.2.1",
+        "pocketbase": "^0.15.2",
+        "rc-slider": "^10.2.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.10.1",
+        "react-router": "^6.13.0",
+        "react-router-dom": "^6.13.0",
+        "react-scripts": "5.0.1",
+        "react-swipeable": "^7.0.1",
+        "sass": "^1.77.8",
+        "typescript": "^4.9.5",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "create-component": "node tools/component.cjs",
+        "crc": "node tools/component.cjs"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/react": "^18.3.3"
+    }
 }
