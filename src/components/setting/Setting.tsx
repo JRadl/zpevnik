@@ -11,13 +11,7 @@ interface setting {
     indent?: boolean;
 }
 
-export default function Setting({
-    title,
-    text,
-    name,
-    input = null,
-    indent = false,
-}: setting) {
+export default function Setting({ title, text, name, input = null, indent = false }: setting) {
     return (
         <div className={"setting" + (indent ? " indent" : "")}>
             <div className="left">
@@ -28,12 +22,7 @@ export default function Setting({
                 {input ? (
                     input
                 ) : (
-                    <Toggle
-                        onChange={(v: string) =>
-                            model.setSettings({ [name]: v })
-                        }
-                        value={model.setting(name)}
-                    />
+                    <Toggle onChange={(v: string) => model.setSettings({ [name]: v })} value={model.setting(name)} />
                 )}
             </div>
         </div>
