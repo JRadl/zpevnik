@@ -17,7 +17,6 @@ export default function CollectionsSettings() {
     return (
         <div className="section">
             <button onClick={addCollection}>Add</button>
-            <hr />
             {collections.map((c, key) => (
                 <CollectionComponent collection={c} key={key} />
             ))}
