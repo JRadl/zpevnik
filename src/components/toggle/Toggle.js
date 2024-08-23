@@ -1,32 +1,17 @@
-import React from 'react';
-import './Toggle.js';
-import './Toggle.scss';
+import React from "react";
+import { useState } from "react";
+import "./Toggle.scss";
 
-export class Toggle extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            value: props.value || false,
-        }
-    }
+export function Toggle({ onChange, value }) {
+    const [val, setVal] = useState(value);
+    const toggle = () => {
+        onChange(!val);
+        setVal(!val);
+    };
 
-    componentDidUpdate(prevProps,prevState){
-        if(prevProps.value !== this.props.value){
-            this.setState({value:this.props.value})
-        }
-        if(prevState.value !== this.state.value){
-            if(this.props.onChange){
-                this.props.onChange(this.state.value)
-            }
-        }
-    }
-
-    render(){
-        return <div 
-            className={"comp-toggle"+(this.state.value?" active":"")} 
-            onClick={()=>this.setState({value:!this.state.value})}>
+    return (
+        <div className={"comp-toggle" + (val ? " active" : "")} onClick={() => toggle()}>
             <div className="thumb"></div>
         </div>
-    }
+    );
 }
-
