@@ -179,7 +179,7 @@ class ZpevnikDataModel {
     }
 
     get songCount() {
-        return this.state.collections.reduce((prev, curr) => prev + curr.songs.length, 0);
+        return this.state.collections?.reduce((prev, curr) => prev + curr.songs?.length || 0, 0) || 0;
     }
 
     //get sorted song ids
@@ -299,6 +299,11 @@ class ZpevnikDataModel {
         const index = collections.map((c) => c.id).indexOf(collectionId);
         if (index === -1) throw new Error("Collection not found");
         collections[index].display = !collections[index].display;
+        this.setCollections(collections);
+    }
+
+    deleteCollection(collectionId: string) {
+        const collections = [...this.state.collections].filter((c) => c.id !== collectionId);
         this.setCollections(collections);
     }
 }

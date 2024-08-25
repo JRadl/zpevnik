@@ -1,0 +1,16 @@
+.button-component {
+    display: inline-flex;
+    padding: 0.5em 0.8em;
+    .icon {
+        margin-right: 0.5em;
+        display: flex;
+        align-items: center;
+    }
+    align-items: center;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background-color: var(--widget-bg);
+    &:hover {
+        background-color: var(--widget-bg-hover);
+    }
+}

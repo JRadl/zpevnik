@@ -92,9 +92,14 @@
     }
 
     .collection {
-        padding: 1em 0em;
+        padding: 0.5em 0em;
+        margin: 0.5em 0em;
         display: flex;
         gap: 1em;
+        border-radius: var(--border-radius);
+        &:hover {
+            background-color: var(--menu-hover-bg);
+        }
         .title {
             font-weight: 700;
         }
@@ -108,8 +113,19 @@
             align-items: center;
             justify-content: center;
         }
-        .right {
+        .middle {
             flex-grow: 1;
+        }
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            padding: 0em 0.5em;
+            cursor: pointer;
+            :hover {
+                background-color: var(--menu-hover-bg);
+            }
         }
     }
 }
