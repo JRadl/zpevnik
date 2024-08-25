@@ -8,7 +8,7 @@ import model from "../../../resources/model/model";
 export default function CollectionsSettings() {
     const addCollection = async () => {
         const collection = await CollectionHelper.loadCollectionFromFile();
-        console.log(collection);
+        //console.log(collection);
         model.addCollection(collection);
     };
 
