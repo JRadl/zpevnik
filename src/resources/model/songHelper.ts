@@ -12,6 +12,15 @@ export interface Song {
     verses: Verse[];
 }
 
+export interface SongL {
+    id: string;
+    title: string;
+    author: string;
+    capo: number;
+    sfw: boolean;
+    lyrics: string;
+}
+
 export function lyricsToVerses(lyrics: string): Verse[] {
     let verseNames: string[] = [];
     lyrics.replaceAll(/<.*>/g, (x: string) => {

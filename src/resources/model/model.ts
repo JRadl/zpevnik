@@ -118,8 +118,14 @@ class ZpevnikDataModel {
             this.setState({ collections });
         }
 
+        const displayDefault = this.state.collections?.[0]?.display ?? true;
         getSongs().then((res) => {
-            this.addCollection({ id: "default", title: "Default", display: true, songs: res });
+            this.addCollection({
+                id: "default",
+                title: "Default",
+                display: displayDefault,
+                songs: res,
+            });
         });
     }
 
@@ -288,8 +294,9 @@ class ZpevnikDataModel {
     }
 
     addCollection(collection: Collection) {
-        const collections = [...this.state.collections].filter((c) => c.id !== collection.id);
-        collections.push(collection);
+        let collections = [...this.state.collections].filter((c) => c.id !== collection.id);
+        if (collection.id === "default") collections = [collection, ...collections];
+        else collections = [...collections, collection];
         this.setCollections(collections);
     }
 

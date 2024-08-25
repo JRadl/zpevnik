@@ -12,13 +12,7 @@ export type SongComponentProps = {
     transposeCapo?: boolean;
 };
 
-function SongComponent({
-    song,
-    columns = 1,
-    fontSize = 20,
-    trans = 0,
-    transposeCapo = false,
-}: SongComponentProps) {
+function SongComponent({ song, columns = 1, fontSize = 20, trans = 0, transposeCapo = false }: SongComponentProps) {
     let capo = (12 + song.capo - (transposeCapo ? trans : 0)) % 12;
     let displayCapo = !!capo || !!song.capo;
 
