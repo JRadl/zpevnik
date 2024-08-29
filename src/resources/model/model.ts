@@ -174,7 +174,6 @@ class ZpevnikDataModel {
             }
         });
 
-        if (!set.displayNsfw) songs = songs.filter((s) => s.sfw);
         if (set.sortAlphabetically) songs = songs.sort((a, b) => a.title.localeCompare(b.title));
         if (set.showFavorites && !set.separateFavorites)
             songs = songs.sort((a, b) =>
