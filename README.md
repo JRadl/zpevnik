@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Kubíkův zpěvník
+
+## Backend
+
+Backend je v [pocketbase](https://pocketbase.io). Url backendu se nastavuje v env proměnné `REACT_APP_POCKET_URL`.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
