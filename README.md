@@ -4,8 +4,13 @@
 
 Backend je v [pocketbase](https://pocketbase.io). Url backendu se nastavuje v env proměnné `REACT_APP_POCKET_URL`.
 
+## Kontejner
+
+Webový server běží na portu 8080.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 

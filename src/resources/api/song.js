@@ -13,13 +13,28 @@ function mapSong(s) {
     };
 }
 
-export async function getSongs() {
-    let res = JSON.parse(localStorage.getItem("songs"));
+export async function getSongbooks() {
+    let res = JSON.parse(localStorage.getItem("zpevnik_songbooks"));
 
     try {
-        res = await pocket.collection("song").getFullList(1000);
+        res = pocket.collection("zpevnik_songbooks").getFullList(1000);
+        localStorage.setItem("zpevnik_songbooks", JSON.stringify(res));
+    } catch(error) {
+        console.log(error);
+    }
+
+    return res;
+}
+
+export async function getSongs(songbook) {
+    let res = JSON.parse(localStorage.getItem("zpevnik_songs"));
+
+    try {
+        res = await pocket.collection("zpevnik_songs").getFullList({
+            filter: `songbook = ${songbook}`
+        });
         res = res.map((s) => mapSong(s));
-        localStorage.setItem("songs", JSON.stringify(res));
+        localStorage.setItem("zpevnik_songs", JSON.stringify(res));
     } catch (error) {
         console.log(error);
     }
