@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { Song } from '../components/song';
+import SongComponent from '../components/song/Song';
 import model from '../resources/model/model';
 import './SongPage.scss';
 
@@ -34,13 +34,12 @@ export default function SongPage() {
         <Link className="notA" to={"/" + prev}><div className="prev"><i className="fas fa-chevron-left"></i></div></Link>
         <Link className="notA" to={"/" + next}><div className="next"><i className="fas fa-chevron-right"></i></div></Link>
         <div className="page" id="song-page" {...(model.settings.swipeGesturesPrevNext ?handlers:{})}>
-            <Song
+            <SongComponent
                 song={song}
                 columns={model.settings.columns}
                 fontSize={model.settings.fontSize}
                 trans={model.settings.transpose}
                 transposeCapo={model.settings.transposeCapo}
-                instrument={model.settings.chords}
             />
         </div>
     </>

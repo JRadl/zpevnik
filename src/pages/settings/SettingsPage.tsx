@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  FaBroadcastTower,
-  FaBrush,
-  FaCog,
-  FaCogs,
-  FaSquare,
-} from "react-icons/fa";
+import { FaBroadcastTower, FaBrush, FaCog, FaCogs, FaList, FaSquare } from "react-icons/fa";
 import { VscArrowLeft } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import packageJSON from "../../../package.json";
@@ -16,6 +10,7 @@ import BehaviorSettings from "./sections/Behavior";
 import ButtonsSection from "./sections/Buttons";
 import SessionSettings from "./sections/Session";
 import VisualSettings from "./sections/Visual";
+import CollectionsSettings from "./sections/Collections";
 
 export default function SettingsPage() {
     const navigate = useNavigate();
@@ -36,12 +31,13 @@ export default function SettingsPage() {
             element: <SessionSettings />,
             icon: <FaBroadcastTower />,
         },
-        { title: "Advanced", element: <AdvancedSettings showNSFW={showNSFW > 0}/>, icon: <FaCogs /> },
+        { title: "Advanced", element: <AdvancedSettings showNSFW={showNSFW > 0} />, icon: <FaCogs /> },
+        { title: "Collections", element: <CollectionsSettings />, icon: <FaList /> },
     ];
 
     return (
         <div id="settings">
-            <h1 onClick={()=>setNSFW(showNSFW+1)}>
+            <h1 onClick={() => setNSFW(showNSFW + 1)}>
                 Settings
                 <VscArrowLeft onClick={() => navigate(-1)} />
             </h1>
@@ -62,7 +58,9 @@ export default function SettingsPage() {
             <hr />
 
             <div className="info">
-                <p>There are currently {model.songs.length} songs.</p>
+                <p>
+                    There are currently {model.songCount} songs. ({model.songs.length} displayed)
+                </p>
                 <p>Version {packageJSON.version}</p>
             </div>
         </div>

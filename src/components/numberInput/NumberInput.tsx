@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './NumberInput.scss'
-import { FaMinusCircle, FaPlusCircle } from 'react-icons/fa'
 
 interface props {
     onChange: (v:number)=>any,
@@ -14,7 +13,7 @@ export default function NumberInput({onChange =(v)=>{}, defaultValue = 0, step =
     const [value, setValue] = useState(defaultValue)
     useEffect(()=>{
         onChange(value)
-    }, [value])
+    }, [value, onChange])
 
     useEffect(()=>{
         setValue(defaultValue)

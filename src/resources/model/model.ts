@@ -1,5 +1,5 @@
 import { Record, RecordSubscription } from "pocketbase";
-import { getCacheSongs, getSongs } from "../api/song";
+import { getSongs } from "../api/song";
 import { autoFit, getCurrentSongId, normalize } from "../helpers";
 import {
     changeSessionSong,
@@ -8,23 +8,25 @@ import {
     subscribeToSession,
     unsubscribeFromSession,
 } from "../pocket/session";
+import { Collection } from "./collectionHelper";
+import { Song } from "./songHelper";
 
 type id = string;
 
-export interface song {
-    id: id;
-    title: string;
-    author: string;
-    capo: number;
-    sfw: boolean;
-    verses: any;
+interface State {
+    navigate: (str: string) => any;
+    collections: Collection[];
+    songs: Song[];
+    settings: any;
+    session: any;
 }
 
 class ZpevnikDataModel {
     updateCallbacks: (() => any)[] = [];
-    state = {
+    state: State = {
         navigate: (to: string) => {},
         songs: [],
+        collections: [],
         settings: {
             columns: 1,
             transpose: 0,
@@ -109,12 +111,21 @@ class ZpevnikDataModel {
     }
 
     //load songs from local storage, then attempt to load from server
-    async loadSongs() {
-        const cache = getCacheSongs();
-        if (Array.isArray(cache)) this.setState({ songs: cache });
+    async loadCollections() {
+        const ls = localStorage.getItem("collections");
+        if (ls) {
+            const collections = JSON.parse(ls);
+            this.setState({ collections });
+        }
 
+        const displayDefault = this.state.collections?.[0]?.display ?? true;
         getSongs().then((res) => {
-            this.setState({ songs: res });
+            this.addCollection({
+                id: "default",
+                title: "Default",
+                display: displayDefault,
+                songs: res,
+            });
         });
     }
 
@@ -139,7 +150,7 @@ class ZpevnikDataModel {
 
     constructor() {
         this.loadSettings();
-        this.loadSongs();
+        this.loadCollections();
         this.loadSession();
     }
 
@@ -154,12 +165,18 @@ class ZpevnikDataModel {
 
     //get songs sorted and filtered depending on settings
     get songs() {
-        let set = this.state.settings;
-        let favorites: string[] = set.favorites || [];
-        let songs: song[] = this.state.songs || [];
+        const set = this.state.settings;
+        const favorites: string[] = set.favorites || [];
+        let songs: Song[] = [];
+        this.state.collections.forEach((c) => {
+            if (c.display) {
+                songs = [...songs, ...c.songs];
+            }
+        });
 
         //if (!set.displayNsfw)
         //    songs = songs.filter(s => s.sfw)
+
         if (set.sortAlphabetically) songs = songs.sort((a, b) => a.title.localeCompare(b.title));
         if (set.showFavorites && !set.separateFavorites)
             songs = songs.sort((a, b) =>
@@ -167,6 +184,10 @@ class ZpevnikDataModel {
             );
 
         return songs;
+    }
+
+    get songCount() {
+        return this.state.collections?.reduce((prev, curr) => prev + curr.songs?.length || 0, 0) || 0;
     }
 
     //get sorted song ids
@@ -186,7 +207,7 @@ class ZpevnikDataModel {
     }
 
     //get song by id in window URI
-    get currentSong(): song | undefined {
+    get currentSong(): Song | undefined {
         let id = getCurrentSongId();
         return this.getSongById(id);
     }
@@ -265,6 +286,34 @@ class ZpevnikDataModel {
     ////
     autoFit() {
         autoFit();
+    }
+
+    //* COLLECTIONS *//
+
+    setCollections(collections: Collection[]) {
+        this.setState({ collections });
+        localStorage.setItem("collections", JSON.stringify(collections));
+    }
+
+    addCollection(collection: Collection) {
+        let collections = [...this.state.collections].filter((c) => c.id !== collection.id);
+        if (collection.id === "default") collections = [collection, ...collections];
+        else collections = [...collections, collection];
+        this.setCollections(collections);
+    }
+
+    toggleCollection(collectionId: string) {
+        const collections = [...this.state.collections];
+        if (!collections?.length) throw new Error("No collections");
+        const index = collections.map((c) => c.id).indexOf(collectionId);
+        if (index === -1) throw new Error("Collection not found");
+        collections[index].display = !collections[index].display;
+        this.setCollections(collections);
+    }
+
+    deleteCollection(collectionId: string) {
+        const collections = [...this.state.collections].filter((c) => c.id !== collectionId);
+        this.setCollections(collections);
     }
 }
 

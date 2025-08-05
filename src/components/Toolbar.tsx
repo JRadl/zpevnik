@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import model, { song } from "../resources/model/model";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import model from "../resources/model/model";
 
 interface props {
   toggleSidebar: () => any;

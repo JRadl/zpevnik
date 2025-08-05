@@ -1,6 +1,6 @@
 {
   "name": "zpevnik",
-  "version": "3.9.3",
+  "version": "3.11.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -33,6 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    "create-component": "node tools/component.cjs",
+    "crc": "node tools/component.cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +53,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+	  "@types/react": "^18.3.3",
+	  "workbox-core": "^7.1.0",
+	  "workbox-expiration": "^7.1.0",
+	  "workbox-precaching": "^7.1.0",
+	  "workbox-routing": "^7.1.0",
+	  "workbox-strategies": "^7.1.0"
   }
 }
